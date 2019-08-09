@@ -1,7 +1,7 @@
 "use strict";
 
 window.onload = function () {
-    //document.getElementById("inputFoodSelect").onchange = getMts;
+    let table = document.getElementById("mtnTours");
 
     let objs;
     $.getJSON("data/mountains.json",
@@ -18,16 +18,18 @@ window.onload = function () {
                 selection.add(opt);
             }
 
-            // const addBtn = document.getElementById("addBtn");
-            // addBtn.onclick 
             selection.onchange = function () {
+                table.innerHTML = "";
+                if ( selection.value == "zero" ) {
+                } else {
                 let selectedMt = objs.mountains[(selection.selectedIndex - 1)];
+
                 let mtName = selectedMt.name;
                 let mtDesc = selectedMt.desc;
                 let mtElevation = selectedMt.elevation;
                 let mtEffort = selectedMt.effort;
                 let mtImg = selectedMt.img;
-                let table = document.getElementById("mtnTours");
+                
 
                 while (table.childNodes.length) {
                     table.innerHTML = "";
@@ -72,12 +74,10 @@ window.onload = function () {
                 let cell12 = row6.insertCell(1);
                 cell12.appendChild(imgSrc);
 
-                // selection.onchange = function () {
-                //     table.innerHTML = "";
-                // }
                 document.getElementById("resetBtn").onclick = function () {
                     table.innerHTML = "";
                 }
+            }
             }
         }
     )
