@@ -1,0 +1,42 @@
+#topC, .jumboT {
+    padding-top: .75em;
+    margin-top: .75em;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+}
+
+.pTop {
+    font-family: 'PT Serif', serif;
+    white-space: nowrap;
+}
+
+#errorP {
+    font-style: italic;
+    color: whitesmoke;
+    background-image: linear-gradient(360deg,#383836 10%,#4a4a4a 360%);
+    padding-top: .4em;
+    margin-top: .8em;
+    display: none;
+    border-radius: 25px;
+    text-align: center;
+}
+
+#msgError {
+    font-weight: bold;
+    text-decoration: underline rgb(253, 32, 253);
+    color: crimson;
+}
+
+footer p {
+    float: right;
+}
+
+.inputDiv {
+    display: none;
+}
+
+/* .hideDis {
+    display: none;
+}  */
