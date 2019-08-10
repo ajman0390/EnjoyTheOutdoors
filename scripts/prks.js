@@ -31,7 +31,6 @@ window.onload = function () {
         }
     };
 
-
     // park type dropdown
     inputTypeDropdown.onchange = function () {
         clearTable();
