@@ -33,7 +33,7 @@ footer p {
     float: right;
 }
 
-.inputDiv {
+#parkTypeDiv {
     display: none;
 }
 

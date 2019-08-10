@@ -1,181 +1,104 @@
 "use strict";
 
 window.onload = function () {
-    document.getElementById("stateCheck").onchange = choseSelect;
-    document.getElementById("parkTypeCheck").onchange = choseSelect;
+    const stateRadio = document.getElementById("stateRadio");
+    const tableBody = document.getElementById("tblBody");
+    
+    const inputStateDropdown = document.getElementById("inputState");
+    const inputTypeDropdown = document.getElementById("inputParkTypeSelect");
 
-    const inputStateField = document.getElementById("inputState");
-    const inputTypeField = document.getElementById("inputParkTypeSelect");
-    let table = document.getElementById("parkTable");
+    createTypeDropdown(inputTypeDropdown);
+    displaySearch(inputStateDropdown, inputTypeDropdown);
 
-    selectType();
-
-
-    let objs;
+    let parkObjs;
     $.getJSON("data/nationalparks.json",
         function (data) {
-            objs = data;
+            parkObjs = data;
+        });
 
-            inputStateField.onchange = function () {
-                let selectedParkState = inputStateField.options[inputStateField.selectedIndex].innerHTML;
-                console.log(selectedParkState);
+    // state dropdown 
+    inputStateDropdown.onchange = function () {
+        clearTable();
 
-                while (table.childNodes.length) {
-                    table.innerHTML = "";
-                };
+        let selectedParkState = inputStateDropdown.options[inputStateDropdown.selectedIndex].innerHTML;
 
-                let tblHead = table.createTHead();
-                let thRow = tblHead.insertRow(table.rows.length);
-
-                let thCell0 = thRow.insertCell(0);
-                let thCell1 = thRow.insertCell(1);
-                let thCell2 = thRow.insertCell(2);
-                let thCell3 = thRow.insertCell(3);
-
-                thCell0.innerHTML = "<b>Park Name</b>";
-                thCell1.innerHTML = "<b>Location</b>";
-                thCell2.innerHTML = "<b>Address</b>";
-                thCell3.innerHTML = "<b>Link</b>";
-                table.className = "table table-striped table-hover table-bordered";
-
-                // tblHead.appendChild(thRow);
-                // table.appendChild(tblHead);
-
-                const len = objs.parks.length;
-                for (let i = 0; i < len; i++) {
-                    if (selectedParkState == objs.parks[i].State) {
-
-                        // Setting values
-                        let selectedPrk = objs.parks[(i)];
-                        let parkName = selectedPrk.LocationName;
-                        let parkAddress = selectedPrk.Address;
-                        let parkcity = selectedPrk.City;
-                        let parkState = selectedPrk.State;
-                        let parkZip = selectedPrk.ZipCode;
-                        let parkLocation = selectedPrk.Location
-                        let parkVisit = selectedPrk.Visit
-
-                        // const len = objs.parks.length;
-                        //for (let i = 0; i < len; i++) {
-
-                        //}
-                        let tblBody = table.createTBody();
-                        let tbRow = table.insertRow(table.rows.length);
-
-                        let cell1 = tbRow.insertCell(0);
-                        cell1.innerHTML = parkName;
-
-                        let cell2 = tbRow.insertCell(1);
-                        cell2.innerHTML = parkLocation.coordinates[0] + " " + parkLocation.coordinates[1];
-
-
-                        let cell3 = tbRow.insertCell(2);
-                        cell3.innerHTML = parkAddress + " " + parkcity + "<br />" + parkState + " " + parkZip;
-                        let cell4 = tbRow.insertCell(3);
-
-                        //console.log(parkVisit);
-                        if ( parkVisit != undefined ) {
-                            let prkVist = document.createElement("a");
-                            prkVist.href = parkVisit;
-                            prkVist.innerHTML = parkVisit;
-                            prkVist.target = "_blank";
-                            cell4.appendChild(prkVist);
-                        } else {
-                            cell4.innerHTML = "&nbsp";
-                        }
-
-                        //tblBody.appendChild(table);
-                        //tblBody.appendChild(row);
-                        
-                        
-                    }
-                }
-                document.getElementById("resetBtn").onclick = function () {
-                    table.innerHTML = "";
-                }
-
-
+        const stateLen = parkObjs.parks.length;
+        for (let i = 0; i < stateLen; i++) {
+            let selectedPrk = parkObjs.parks[i];
+            if (selectedParkState == selectedPrk.State) {
+                insertRowInTable(tableBody, selectedPrk);
             }
-
-            // search by park Type
-            inputTypeField.onchange = function() {
-                let selectedParkType = inputTypeField.options[inputTypeField.selectedIndex].innerHTML;
-                console.log(selectedParkType);
-
-                // let str = parkName;
-                // console.log(str)
-
-                for (let j = 0; j < objs.parks.length; j++) {
-                let find = objs.parks[j].LocationName.indexOf(selectedParkType);
-                console.log(find);
-                }
-
-                while (table.childNodes.length) {
-                    table.innerHTML = "";
-                };
-
-                let tblHead = table.createTHead();
-                let thRow = tblHead.insertRow(table.rows.length);
-
-                let thCell0 = thRow.insertCell(0);
-                let thCell1 = thRow.insertCell(1);
-                let thCell2 = thRow.insertCell(2);
-                let thCell3 = thRow.insertCell(3);
-
-                thCell0.innerHTML = "<b>Park Name</b>";
-                thCell1.innerHTML = "<b>Location</b>";
-                thCell2.innerHTML = "<b>Address</b>";
-                thCell3.innerHTML = "<b>Link</b>";
-                table.className = "table table-striped table-hover table-bordered";
-
-                const len = objs.parks.length;
-                for ( let j = 0; j < objs.parks.length; j++ ) {
-                    if ( selectedParkType == objs.parks[j].LocationName.indexOf(selectedParkType) ) {
-                        let selectedTypePrk = objs.parks[(j)];
-                        let parkName = selectedTypePrk.LocationName;
-                        let parkAddress = selectedTypePrk.Address;
-                        let parkcity = selectedTypePrk.City;
-                        let parkState = selectedTypePrk.State;
-                        let parkZip = selectedTypePrk.ZipCode;
-                        let parkLocation = selectedTypePrk.Location
-                        let parkVisit = selectedTypePrk.Visit
-
-                        let tblBody = table.createTBody();
-                        let tbRow = table.insertRow(table.rows.length);
-
-                        let cell11 = tbRow.insertCell(0);
-                        cell11.innerHTML = parkName;
-
-                        let cell21 = tbRow.insertCell(1);
-                        cell21.innerHTML = parkLocation.coordinates[0] + " " + parkLocation.coordinates[1];
+        }
+    };
 
 
-                        let cell31 = tbRow.insertCell(2);
-                        cell31.innerHTML = parkAddress + " " + parkcity + "<br />" + parkState + " " + parkZip;
-                        let cell41 = tbRow.insertCell(3);
+    // park type dropdown
+    inputTypeDropdown.onchange = function () {
+        clearTable();
+        const typeLen = parkObjs.parks.length;
+        for (let i = 0; i < typeLen; i++) {
+            let selectedPrk = parkObjs.parks[i];
+            let str = selectedPrk.LocationName;
+            let searchResult = str.toLowerCase().indexOf(inputTypeDropdown.value.toLowerCase())
 
-                        if ( parkVisit != undefined ) {
-                            let prkVist = document.createElement("a");
-                            prkVist.href = parkVisit;
-                            prkVist.innerHTML = parkVisit;
-                            prkVist.target = "_blank";
-                            cell4.appendChild(prkVist);
-                        } else {
-                            cell4.innerHTML = "&nbsp";
-                        }
-                        
-                        
-                    }
-                }
-                document.getElementById("resetBtn").onclick = function () {
-                    table.innerHTML = "";
-                }
-
+            if (searchResult >= 0) {
+                insertRowInTable(tableBody, selectedPrk);
             }
-        })
+        };
+    }
+
+    // show all Btn
+    const showAllBtn = document.getElementById('showAllBtn');
+    showAllBtn.onclick = function () {
+        clearTable();
+        let objLen = parkObjs.parks.length;
+        for (let i = 0; i < objLen; i++) {
+            let selectedPrk = parkObjs.parks[i];
+            insertRowInTable(tableBody, selectedPrk);
+        }
+    };
+
+    // reset button
+    const resetBtn = document.getElementById('resetBtn');
+    resetBtn.onclick = function () {
+        //sets visible divs back to initial, drop down boxes and radio buttons to initial
+        stateDiv.style.display = 'block';
+        parkTypeDiv.style.display = 'none';
+        inputStateDropdown.selectedIndex = 0;
+        stateRadio.checked = true;
+        //clears table contents, if any
+        clearTable();
+    };
+
+
+    
+} // end of window.onload function
+
+
+function insertRowInTable(tableBody, selectedPrk) {
+    let link = selectedPrk.Visit;
+
+    let row = tableBody.insertRow(tableBody.rows.length);
+    let cell1 = row.insertCell(0);
+    cell1.innerHTML = selectedPrk.LocationName;
+    let cell2 = row.insertCell(1);
+    cell2.innerHTML = selectedPrk.Address + ", <br/>" + selectedPrk.City + ", " +  selectedPrk.State + ", " + selectedPrk.ZipCode;
+    let cell3 = row.insertCell(2);
+    cell3.innerHTML = "(" + selectedPrk.Latitude + "&#176;,  " + selectedPrk.Longitude + "&#176;)";
+    let cell4 = row.insertCell(3);
+    if (link != undefined) {
+        let linkField = document.createElement("a");
+        linkField.href = link;
+        linkField.innerHTML = link;
+        linkField.target = "_blank";
+        cell4.appendChild(linkField);
+    } else {
+        cell4.innerHTML = "&nbsp;";
+    }
 }
 
-function selectType() {
+
+function createTypeDropdown(inputTypeDropdown) {
     let parkTypes = [
         "National Park",
         "National Monument",
@@ -192,61 +115,41 @@ function selectType() {
         "Parkway"
     ];
 
-    let selectedParkType = document.getElementById("inputParkTypeSelect");
-    const len = parkTypes.length;
-    for (let i = 0; i < len; i++) {
+    // to populate park type dropdown
+    const parkTypeLen = parkTypes.length;
+    for (let i = 0; i < parkTypeLen; i++) {
 
         let opt = document.createElement("option");
-        opt.value = i;
+        opt.value = parkTypes[i];
         opt.text = parkTypes[i];
-        selectedParkType.add(opt);
+        inputTypeDropdown.add(opt);
     }
 }
 
-function choseSelect() {
-    let stateChecked = Number(document.getElementById("stateCheck").checked);
-    let typeChecked = Number(document.getElementById("parkTypeCheck").checked);
+function displaySearch(inputStateDropdown, inputTypeDropdown) {
+    let stateRadio = document.getElementById("stateRadio");
+    let typeRadio = document.getElementById("parkTypeRadio");
 
-    if (stateChecked) {
-        let stateDiv = document.getElementById("stateDiv");
-        stateDiv.style.display = "block";
-
-    } else if (typeChecked) {
-        let typeDiv = document.getElementById("parkTypeDiv");
-        typeDiv.style.display = "block";
-    } else {
-        document.getElementsByClassName("inputDiv")[0].style.display = "none";
-        document.getElementsByClassName("inputDiv")[1].style.display = "none";
-    }
+    //this function hides the park type filter options when location selected
+    stateRadio.onclick = function () {
+        clearTable();
+        parkTypeDiv.style.display = 'none';
+        stateDiv.style.display = 'block';
+        inputStateDropdown.selectedIndex = 0;
+    };
+    //this function hides the state/location filter options when location selected
+    typeRadio.onclick = function () {
+        clearTable();
+        stateDiv.style.display = 'none';
+        parkTypeDiv.style.display = 'block';
+        inputTypeDropdown.selectedIndex = 0;
+    };
 }
 
-// function createTable(table, objs) {
-//     let table = document.getElementById("parkTable");
-//     let tblHead = table.createTHead();
-//     let thRow = tblHead.insertRow(table.rows.length);
-
-//     let thCell0 = thRow.insertCell(0);
-//     let thCell1 = thRow.insertCell(1);
-//     let thCell2 = thRow.insertCell(2);
-//     let thCell3 = thRow.insertCell(3);
-
-//     thCell0.innerHTML = "<b>Name</b>";
-//     thCell1.innerHTML = "<b>Address</b>";
-//     thCell2.innerHTML = "<b>Name</b>";
-
-
-//     let tblBody = document.createElement("tbody");
-//     let tblTH = document.createElement("th");
-//     let tblHeadRow = tblHead.insertRow();
-
-
-//     let cell1 = row.insertCell(0); tblTH
-//     cell1.innerHTML = "<b>name</b>";
-
-//     for (let i = 0; i < len; i++) {
-//         let th = document.createElement("th");
-//         let text = document.createTextNode("tbody");
-//         let data = Object.keys(objs[0]);
-
-//     }
-// }
+//clears results table if there are any rows
+function clearTable() {
+    let tableBody = document.getElementById("tblBody");
+    while (tableBody.childNodes.length) {
+        tableBody.removeChild(tableBody.childNodes[0]);
+    }
+}
