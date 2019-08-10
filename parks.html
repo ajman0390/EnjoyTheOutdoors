@@ -62,7 +62,7 @@
     </header>
 
 
-    <main class="container text-center">
+    <main class="container ">
 
         <form class="form-horizontal well" id="car-Rental" method="GET" action="#">
 
@@ -71,18 +71,29 @@
             <hr />
 
 
-            <div class="container">
-                <!-- Breakfast checkbox Input -->
-                <fieldset class="form-group">
-                    <legend>Options: </legend>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="parkCheck" id="stateCheck" value="option1">
-                        <label class="form-check-label" for="stateCheck">Search By State</label>
+            <div class="container ">
+                <!-- offset-col-md-4 -->
+                <div class="row" id="formBtns">
+                    <!-- Form Show All and Reset Btns -->
+                    <div class="text-center col">
+                        <button type="button" class="btn btn-outline-primary btn-lg" name="showAllBtn"
+                            id="showAllBtn">Show All</button>
+                        <button type="reset" class="btn btn-outline-danger btn-lg" id="resetBtn">Reset</button>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="parkCheck" id="parkTypeCheck"
+                </div>
+
+                <!-- Radio Input -->
+                <fieldset class="form-group p-6 rounded col-md-4  ">
+                    <legend>Search Options: </legend>
+                    <div class="custom-control-inline custom-radio pr-3 ">
+                        <input class="custom-control-input" type="radio" name="parkSort" id="stateRadio"
+                            value="stateRadio" checked>
+                        <label class="custom-control-label" for="stateRadio">Search By State</label>
+                    </div>
+                    <div class="custom-control-inline custom-radio pr-3">
+                        <input class="custom-control-input" type="radio" name="parkSort" id="parkTypeRadio"
                             value="option2">
-                        <label class="form-check-label" for="parkTypeCheck">Search By Park Type</label>
+                        <label class="custom-control-label" for="parkTypeRadio">Search By Park Type</label>
                     </div>
                 </fieldset>
             </div> <!-- /container -->
@@ -95,7 +106,7 @@
                     <div class="form-group col-md-4">
                         <!-- <label for="inputState">State</label> -->
                         <select id="inputState" class="form-control">
-                            <option selected>State</option>
+                            <option value="zero" selected>State</option>
                             <option value="1">Alabama</option>
                             <option value="2">Alaska</option>
                             <option value="3">Arizona</option>
@@ -151,11 +162,6 @@
                         </select>
                     </div>
 
-                    <!-- Form Add and Reset Btns -->
-                    <div class="text-center col">
-                        <!-- <button type="button" class="btn btn-outline-primary btn-lg" name="calculate" id="addBtn">Add</button> -->
-                        <button type="reset" class="btn btn-outline-danger btn-lg" id="resetBtn">Reset</button>
-                    </div>
                 </div>
 
             </div>
@@ -171,17 +177,22 @@
                         </select>
 
                     </div>
-                    <!-- Form Add and Reset Btns -->
-                    <div class="text-center col">
-                        <!-- <button type="button" class="btn btn-outline-primary btn-lg" name="calculate" id="addBtn">Add</button> -->
-                        <button type="reset" class="btn btn-outline-danger btn-lg" id="resetBtn">Reset</button>
-                    </div>
+
                 </div>
 
             </div>
 
-            <div class="container col-md-8" id="bottomDiv">
+            <div class="container col-md-10" id="bottomDiv">
                 <table class="table table-striped table-hover table-bordered" id="parkTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-white">Park Name</th>
+                            <th class="text-white">Address</th>
+                            <th class="text-white">Coordinates</th>
+                            <th class="text-white">Website</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblBody"></tbody>
                 </table>
 
             </div>
@@ -191,7 +202,6 @@
             </div>
 
         </form>
-
 
     </main> <!-- /container -->
 
