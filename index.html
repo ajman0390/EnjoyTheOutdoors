@@ -12,13 +12,13 @@
 
   <!-- Added CSS file-->
   <link rel="stylesheet" href="css/main.css">
-  <!-- <link rel="stylesheet" href="css/border.css"> -->
+  <link rel="stylesheet" href="css/border.css">
 
   <!-- Google fonts stylesheet THIS FAILS THE VALIDATOR as Google fonts inputs a pipe for multiple fonts -->
   <link href="https://fonts.googleapis.com/css?family=PT+Serif|Playfair+Display&display=swap" rel="stylesheet">
 
   <link rel="icon" href="img/mt-icon2.png" />
-  <title>Enjoy The Outdoors</title>
+  <title>Explore The Outdoors</title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarsDefault">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="parks.html">National Parks</a>
+              <a class="nav-link" href="parks.html">Parks</a>
             </li>
     
             <li class="nav-item">
@@ -51,10 +51,10 @@
 
     <div class="container">
       <div class="py-3"><br /></div>
-      <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark jumboT">
-        <div class="text-center">
-          <h1 class="display-4 font-italic">Our Little Mountains</h1>
-          <p class="lead my-3 pTop">More features comming soon.</p>
+      <div class="jumbotron text-white rounded">
+        <div class="text-center" id="jumboText">
+          <h1 class="display-4 font-italic">Explore and Search the Outdoors!</h1>
+          <p class="lead my-3 pTop">Search for Parks and Mountains.</p>
         </div>
       </div>
     </div>
@@ -64,23 +64,22 @@
 
   <main class="container text-center">
 
-
     <!-- Row of columns -->
     <section class="row d-flex justify-content-center bottomRow">
             <div class="col-md-4">
-              <h2>National Parks</h2>
+              <h2>Parks</h2>
               <a target="_self" href="parks.html">
-                  <img src="imgs/sm-big-hotel.jpg" alt="National Parks" class="img-thumbnail noneImgBorder" title="National Parks">
+                  <img src="img/Yosemite-Falls.jpg" alt="Yosemite Park" class="img-thumbnail noneImgBorder" title="Park Search">
               </a>
-              <p class="pTop">Get started in reviewing our National Parks. </p>
-              <p><a class="btn btn-secondary" href="parks.html" role="button">National Parks &raquo;</a></p>
+              <p class="pTop">Search for Parks. </p>
+              <p><a class="btn btn-secondary" href="parks.html" role="button">Parks &raquo;</a></p>
             </div>
             <div class="col-md-4">
               <h2>Mountains</h2>
               <a target="_self" href="mountains.html">
-                  <img src="imgs/" alt="Mountains" class="img-thumbnail noneImgBorder" title="Car Rental">
+                  <img src="img/sm-Bear-at-Denali.jpg" alt="Mountains" class="img-thumbnail noneImgBorder" title="Mountain Search">
               </a>
-              <p class="pTop">Review our Mountains. </p>
+              <p class="pTop">Search for Mountains. </p>
               <p><a class="btn btn-secondary" href="mountains.html" role="button">Mountains &raquo;</a></p>
             </div>
           </section>
@@ -90,14 +89,13 @@
 
   <footer class="container">
     <hr />
-    <p>&copy; Adam Jacobs HartCode Academy 2019</p>
+    <p>&copy; Adam Jacobs - HartCode Academy 2019</p>
   </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="js/mountains.js"></script>
 </body>
 
 </html>
