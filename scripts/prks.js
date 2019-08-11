@@ -32,7 +32,6 @@ window.onload = function () {
     };
 
 
-    // parkType Dropdown
     inputTypeDropdown.onchange = function () {
         clearTable();
         const typeLen = parkObjs.parks.length;
