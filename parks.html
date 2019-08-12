@@ -51,7 +51,7 @@
 
         <div class="container">
             <div class="py-3"><br /></div>
-            <div class="jumbotron text-white rounded jumbotron-fluid shadow-sm">
+            <div class="jumbotron text-white rounded jumbotron-fluid shadow">
                 <div class="text-center" id="jumboText">
                     <h1 class="display-4 font-italic">Explore The Parks!</h1>
                     <p class="lead my-3 pTop">Search for Parks</p>
@@ -67,8 +67,7 @@
 
             <!-- Message at top of Form -->
             <h3>National Parks and More!</h3>
-            <small>Search national parks and national monuments, as well as several other types of protected areas
-                of the United States.</small>
+            <small>Search national parks and national monuments, as well as several other types of protected areas of the United States.</small>
             <hr />
 
             <div class="container">
@@ -102,7 +101,6 @@
                 </fieldset>
 
             </div> <!-- /container -->
-
 
             <!-- State search Input Dropdown -->
             <div class="form-group row inputDiv" id="stateDiv">
@@ -174,18 +172,16 @@
                     <label class="col-sm-2 col-form-label" for="inputParkTypeSelect">Park By Type</label>
                     <div class="form-group col-md-4">
                         <select class="custom-select" id="inputParkTypeSelect"
-                            aria-label="Example select with button addon">
+                            aria-label="Park type select Dropdown">
                             <option value="zero" selected>Select One...</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-
-
             <!-- Table for displaying searched parks -->
             <div class="container col-md-10" id="bottomDiv">
-                <table class="table table-striped table-hover table-bordered" id="parkTable">
+                <table class="table table-striped table-hover table-bordered table-md-responsive" id="parkTable">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-white">Park Name</th>

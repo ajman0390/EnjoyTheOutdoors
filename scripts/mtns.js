@@ -12,7 +12,6 @@ window.onload = function () {
             let selection = document.getElementById("inputMtSelect");
             const len = objs.mountains.length;
             for (let i = 0; i < len; i++) {
-
                 let opt = document.createElement("option");
                 opt.value = i;
                 opt.text = objs.mountains[i].name;
@@ -28,7 +27,7 @@ window.onload = function () {
                 selection.selectedIndex = 0;
                 for (let i = 0; i < len; i++) {
                     let objMtn = objs.mountains[i];
-                    insertRowInTable(table, objMtn);
+                    insertRowIntoTable(table, objMtn);
                 }
             };
 
@@ -39,13 +38,14 @@ window.onload = function () {
             }
 
 
+            // onchange to Mtn selection dropdown to display table, if selected mtn is on initial state, no changes to table display
             selection.onchange = function () {
                 clearTable();
                 if (selection.value === "zero") {
                     return;
                 } else {
                     let selectedMt = objs.mountains[(selection.selectedIndex - 1)];
-                    insertRowInTable(table, selectedMt);
+                    insertRowIntoTable(table, selectedMt);
                 }
             }
 
@@ -60,7 +60,7 @@ window.onload = function () {
 * @input tableBody (Form TableBody) - The Table from Form
 * @input selectedMt (MountainObject) - The selected Mountain Object from mountains.data
 */
-function insertRowInTable(table, selectedMt) {
+function insertRowIntoTable(table, selectedMt) {
     let mtName = selectedMt.name;
     let mtDesc = selectedMt.desc;
     let mtElevation = selectedMt.elevation;

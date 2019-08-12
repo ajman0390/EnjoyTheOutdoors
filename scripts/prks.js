@@ -16,7 +16,7 @@ window.onload = function () {
             parkObjs = data;
         });
 
-    // parkState Dropdown 
+    // parkState Dropdown onchange to display parkState Table search results
     inputStateDropdown.onchange = function () {
         clearTable();
 
@@ -26,12 +26,12 @@ window.onload = function () {
         for (let i = 0; i < stateLen; i++) {
             let selectedPrk = parkObjs.parks[i];
             if (selectedParkState == selectedPrk.State) {
-                insertRowInTable(tableBody, selectedPrk);
+                insertRowIntoTable(tableBody, selectedPrk);
             }
         }
     };
 
-
+    // parkType Dropdown onchange to display parkType Table search results
     inputTypeDropdown.onchange = function () {
         clearTable();
         const typeLen = parkObjs.parks.length;
@@ -41,7 +41,7 @@ window.onload = function () {
             let searchResult = str.toLowerCase().indexOf(inputTypeDropdown.value.toLowerCase())
 
             if (searchResult >= 0) {
-                insertRowInTable(tableBody, selectedPrk);
+                insertRowIntoTable(tableBody, selectedPrk);
             }
         };
     }
@@ -55,7 +55,7 @@ window.onload = function () {
         let objLen = parkObjs.parks.length;
         for (let i = 0; i < objLen; i++) {
             let selectedPrk = parkObjs.parks[i];
-            insertRowInTable(tableBody, selectedPrk);
+            insertRowIntoTable(tableBody, selectedPrk);
         }
     };
 
@@ -74,12 +74,12 @@ window.onload = function () {
 } // end of window.onload function
 
 /*
-* This funciton creates and inputs a row into the Form TableBody
+* This function creates and inputs a row into the Form TableBody
 *
 * @input tableBody (Form TableBody) - The TableBody from Form
 * @input selectedPrk (ParkObject) - The selected Park Object 
 */
-function insertRowInTable(tableBody, selectedPrk) {
+function insertRowIntoTable(tableBody, selectedPrk) {
     let link = selectedPrk.Visit;
 
     let row = tableBody.insertRow(tableBody.rows.length);
@@ -94,7 +94,7 @@ function insertRowInTable(tableBody, selectedPrk) {
         let linkField = document.createElement("a");
         linkField.href = link;
         linkField.innerHTML = link;
-        linkField.target = "_blank";
+        linkField.target = "rptTab"; // open multiple webpages in same additonal tab
         cell4.appendChild(linkField);
     } else {
         cell4.innerHTML = "&nbsp;";
@@ -102,7 +102,7 @@ function insertRowInTable(tableBody, selectedPrk) {
 }
 
 /*
-* This funciton creates the Form Input ParkType Dropdown list
+* This function creates the Form Input ParkType Dropdown list
 *
 * @input inputTypeDropdown (Form Dropdown) - The ParkType Search Dropdown list from Input Form
 */
@@ -147,15 +147,15 @@ function displaySearch(inputStateDropdown, inputTypeDropdown) {
     // this function hides the type search dropdown when search by state search radio is selected
     stateRadio.onclick = function () {
         clearTable();
-        parkTypeDiv.style.display = 'none';
-        stateDiv.style.display = 'block';
+        parkTypeDiv.style.display = "none";
+        stateDiv.style.display = "block";
         inputStateDropdown.selectedIndex = 0;
     };
     // this function hides the state search dropdown when search by type search radio is selected
     typeRadio.onclick = function () {
         clearTable();
-        stateDiv.style.display = 'none';
-        parkTypeDiv.style.display = 'block';
+        stateDiv.style.display = "none";
+        parkTypeDiv.style.display = "block";
         inputTypeDropdown.selectedIndex = 0;
     };
 }
