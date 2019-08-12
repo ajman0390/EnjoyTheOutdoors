@@ -71,7 +71,7 @@ function insertRowIntoTable(table, selectedMt) {
     let row = table.insertRow(table.rows.length);
 
     let cell1 = row.insertCell(0);
-    cell1.innerHTML = "<b>Name</b>";
+    cell1.innerHTML = "<b>UserID: </b>";
     let cell2 = row.insertCell(1);
     cell2.innerHTML = mtName;
 
